@@ -108,8 +108,10 @@ export class LockManager {
 
   private _storeThisClientId() {
     const prevClientIds = this._getClientIds();
-    const curClientIds = [...prevClientIds, this._clientId];
-    this._storeClientIds(curClientIds);
+    if (!prevClientIds.includes(this._clientId)) {
+      const curClientIds = [...prevClientIds, this._clientId];
+      this._storeClientIds(curClientIds);
+    }
   }
 
   public async request(...args: RequestArgsCase1): Promise<any>;
